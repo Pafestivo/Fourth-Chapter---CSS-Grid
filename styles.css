@@ -1,0 +1,226 @@
+/* Reset the styling by removing all padding and margin for the page. */
+*,
+::before,
+::after {
+  padding: 0;
+  margin: 0;
+}
+
+/* The browser default for font size is 16px, so I changed it here to 10px. */
+html {
+  font-size: 62.5%;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Baskervville', serif;
+  color: linen;
+  background-color: rgb(20, 30, 40);
+}
+
+h1 {
+  font-family: 'Anton', sans-serif;
+}
+
+h2, h3, h4, h5, h6 {
+  font-family: 'Raleway', sans-serif;
+}
+
+a {
+  /* Removing the underline from the anchor tags. */
+  text-decoration: none;
+  color: linen;
+}
+
+main {
+  /* Using grid to reorganize the page. */
+  display: grid;
+  /* Grid template is used to choose the size of the columns/rows.
+  minmax will take a min value and max value for the size. */
+  grid-template-columns: minmax(2rem, 1fr) minmax(min-content, 94rem) minmax(2rem, 1fr);
+  /* row-gap controls the gap between the colums/rows. */
+  row-gap: 3rem;
+}
+
+img {
+  width: 100%;
+  /* object-fit is used to control how the object behave in the container. Cover will cover the whole container. */
+  object-fit: cover;
+}
+
+hr {
+  margin: 1.5rem 0;
+  border: 1px solid rgba(120, 120, 120, 0.6);
+}
+
+.heading {
+  /* shorthand for grid column end and start together. First value choose on which grid to start, second value chooses on which grid to end. */
+  grid-column: 2 / 3;
+  display: grid;
+  /* grid template columns allow you to choose how many columns you want for your grid and their size.
+  Repeat is used to make an amount of columns with equal size. */
+  grid-template-columns: repeat(2, 1fr);
+  row-gap: 1.5rem;
+}
+
+.text {
+  grid-column: 2 / 3;
+  font-size: 1.8rem;
+  letter-spacing: 0.6px;
+  column-width: 25rem;
+  /* Justifying text making it so the lines in the paragraph as equal length as possible. */
+  text-align: justify;
+}
+
+.hero {
+  /* 1 / -1 is used to make the column take all of the available width of the page. */
+  grid-column: 1 / -1;
+  position: relative;
+}
+
+.hero-title {
+  text-align: center;
+  color: orangered;
+  font-size: 8rem;
+}
+
+.hero-subtitle {
+  font-size: 2.4rem;
+  color: orangered;
+  text-align: center;
+}
+
+.author {
+  font-size: 2rem;
+  font-family: "Raleway", sans-serif;
+}
+
+.author-name a:hover {
+  background-color: #306203;
+}
+
+.publish-date {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.social-icons {
+  display: grid;
+  font-size: 3rem;
+  /* 5 columns, each takes 1fr of the space, which means 5 equal columns. */
+  grid-template-columns: repeat(5, 1fr);
+  /* Choosing how new items will be added. Default value is row. */
+  grid-auto-flow: column;
+  /* Overriding the default size of automatically made columns.
+  By using 1fr, I make sure that all of the rows will stay equal in size. */
+  grid-auto-columns: 1fr;
+  /* Align items controls the alignment on the cross axis, while justify content control alignment on the main axis. */
+  align-items: center;
+}
+
+.first-paragraph::first-letter {
+  font-size: 6rem;
+  color: orangered;
+  float: left;
+  margin-right: 1rem;
+}
+
+.quote {
+  color: #00beef;
+  font-size: 2.4rem;
+  text-align: center;
+  font-family: "Raleway", sans-serif;
+}
+
+/* Adding quotations before and after any item that contains the quote class. */
+.quote::before {
+  content: '" ';
+}
+
+.quote::after {
+  content: ' "';
+}
+
+.text-with-images {
+  /* Its possible to place grid inside grid for better control of the page. */
+  display: grid;
+  /* Choosing the size of the columns. first one will take third of the width, and second one will take 2 thirds. */
+  grid-template-columns: 1fr 2fr;
+  column-gap: 3rem;
+  margin-bottom: 3rem;
+}
+
+.lists {
+  list-style-type: none;
+  margin-top: 2rem;
+}
+
+.lists li {
+  margin-bottom: 1.5rem;
+}
+
+.list-title, .list-subtitle {
+  color: #00beef;
+}
+
+.image-wrapper {
+  display: grid;
+  /* First column 2thirds second column 1third. */
+  grid-template-columns: 2fr 1fr;
+  /* Making 3 rows with a size as small as possible depends on the content of the column */
+  grid-template-rows: repeat(3, min-content);
+  gap: 2rem;
+  /* place-items is a shorthand for both justify content and align items.
+  So this line centers it both vertically and horizontally. */
+  place-items: center;
+}
+
+.image-1, .image-3 {
+  /* Both images will take all of the available width. */
+  grid-column: 1 / -1;
+}
+
+@media only screen and (max-width: 720px) {
+  /* On screens below 720px, the images will appear at the same column of the text. */
+  .image-wrapper {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  /* On screens below 600px, the text will collapse to one column. */
+  .text-with-images {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media only screen and (max-width: 550px) {
+  /* On a screen below 550px: */
+  .hero-title {
+    /* Title will be smaller. */
+    font-size: 6rem;
+  }
+  
+  /* All of the text will be smaller too. */
+  .hero-subtitle,
+  .author,
+  .quote,
+  .list-title {
+    font-size: 1.8rem;
+  }
+  
+  /* Icons will also get smaller. */
+  .social-icons {
+    font-size: 2rem;
+  }
+   /* general text gets smaller. */
+  .text {
+    font-size: 1.6rem;
+  } 
+}
+
+@media only screen and (max-width: 420px) {
+  /* On screens below 420px the title will get even smaller. */
+  .hero-title {
+    font-size: 4.5rem;
+  }
+}
